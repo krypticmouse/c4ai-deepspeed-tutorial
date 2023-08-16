@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "c4ai-deepspeed-tutorial"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "c4ai_deepspeed_tutorial"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+transformers = "^4.31.0"
+datasets = "^2.14.4"
+evaluate = "^0.4.0"
+rouge-score = "^0.1.2"
+py7zr = "^0.20.6"
+loguru = "^0.7.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
