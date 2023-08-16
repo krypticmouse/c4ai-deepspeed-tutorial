@@ -15,6 +15,7 @@ rouge-score = "^0.1.2"
 py7zr = "^0.20.6"
 loguru = "^0.7.0"
 pipreqs = "^0.4.13"
+fire = "^0.5.0"
 
 
 [build-system]

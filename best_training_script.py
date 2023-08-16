@@ -1,15 +1,13 @@
 import rouge
 import numpy as np
-from loguru import logger
-from utils import find_quantiles, preprocess
 
+from loguru import logger
+from utils import find_quantiles
 from datasets import load_dataset
+
 from transformers import AutoTokenizer
 from transformers import DataCollatorForSeq2Seq
 from transformers import AutoModelForSeq2SeqLM, Seq2SeqTrainingArguments, Seq2SeqTrainer
-
-checkpoint = "google/flan-t5-small"
-tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 
 def compute_metrics(eval_pred):
@@ -34,7 +32,13 @@ def compute_metrics(eval_pred):
     return {k: round(v, 4) for k, v in result.items()}
 
 
-def train():
+def train(
+    checkpoint: str,
+    enable_deepseed: bool = False,
+    fairscale_sharded_ddp_strategy: str = ''
+):
+    tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+    
     logger.info("Starting...")
     dataset = load_dataset("samsum")
 
@@ -43,8 +47,8 @@ def train():
 
     logger.info("Finding quantiles")
 
-    dialogue_quantiles = find_quantiles(train_dataset['dialogue'])
-    summary_quantiles = find_quantiles(train_dataset['summary'])
+    dialogue_quantiles = find_quantiles(train_dataset['dialogue'], tokenizer)
+    summary_quantiles = find_quantiles(train_dataset['summary'], tokenizer)
 
     logger.debug(f"Dialogue quantiles: {dialogue_quantiles}")
     logger.debug(f"Summary quantiles: {summary_quantiles}")
@@ -68,6 +72,8 @@ def train():
         weight_decay=0.01,
         save_total_limit=3,
         num_train_epochs=4,
+        deepspeed=enable_deepseed,
+        sharded_ddp=fairscale_sharded_ddp_strategy,
         predict_with_generate=True,
         fp16=True,
     )
@@ -88,3 +94,8 @@ def train():
     tokenizer.save_pretrained("best_summarization_model")
 
     logger.debug("Model Trained Successfully.")
+
+if __name__ == "__main__":
+    import fire
+
+    fire.Fire(train)

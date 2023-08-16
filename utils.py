@@ -16,15 +16,3 @@ def find_quantiles(documents, tokenizer):
     }
 
     return quantiles
-
-
-def preprocess(examples, tokenizer):
-    prefix = "summarize: "
-
-    inputs = [prefix + doc for doc in examples["dialogue"]]
-    model_inputs = tokenizer(inputs, max_length=512, truncation=True)
-
-    labels = tokenizer(text_target=examples["summary"], max_length=94, truncation=True)
-
-    model_inputs["labels"] = labels["input_ids"]
-    return model_inputs
