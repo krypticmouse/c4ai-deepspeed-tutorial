@@ -562,6 +562,17 @@ files = [
 graph = ["objgraph (>=1.7.2)"]
 
 [[package]]
+name = "docopt"
+version = "0.6.2"
+description = "Pythonic argument parser, that will make you smile"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "docopt-0.6.2.tar.gz", hash = "sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"},
+]
+
+[[package]]
 name = "evaluate"
 version = "0.4.0"
 description = "HuggingFace community-driven open-source library of evaluation"
@@ -1154,6 +1165,22 @@ spss = ["pyreadstat (>=1.1.2)"]
 sql-other = ["SQLAlchemy (>=1.4.16)"]
 test = ["hypothesis (>=6.34.2)", "pytest (>=7.3.2)", "pytest-asyncio (>=0.17.0)", "pytest-xdist (>=2.2.0)"]
 xml = ["lxml (>=4.6.3)"]
+
+[[package]]
+name = "pipreqs"
+version = "0.4.13"
+description = "Pip requirements.txt generator based on imports in project"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "pipreqs-0.4.13-py2.py3-none-any.whl", hash = "sha256:e522b9ed54aa3e8b7978ff251ab7a9af2f75d2cd8de4c102e881b666a79a308e"},
+    {file = "pipreqs-0.4.13.tar.gz", hash = "sha256:a17f167880b6921be37533ce4c81ddc6e22b465c107aad557db43b1add56a99b"},
+]
+
+[package.dependencies]
+docopt = "*"
+yarg = "*"
 
 [[package]]
 name = "psutil"
@@ -2231,6 +2258,21 @@ files = [
 ]
 
 [[package]]
+name = "yarg"
+version = "0.1.9"
+description = "A semi hard Cornish cheese, also queries PyPI (PyPI client)"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "yarg-0.1.9-py2.py3-none-any.whl", hash = "sha256:4f9cebdc00fac946c9bf2783d634e538a71c7d280a4d806d45fd4dc0ef441492"},
+    {file = "yarg-0.1.9.tar.gz", hash = "sha256:55695bf4d1e3e7f756496c36a69ba32c40d18f821e38f61d028f6049e5e15911"},
+]
+
+[package.dependencies]
+requests = "*"
+
+[[package]]
 name = "yarl"
 version = "1.9.2"
 description = "Yet another URL library"
@@ -2321,4 +2363,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "7030d12c0f7cceef594735df8296141bddb1c430fda745304e439c1ea094542c"
+content-hash = "a2c407e3bc6d8a9ee13f1247e0277353552681524ee5c7f021b3b3b67d08658e"

@@ -35,6 +35,7 @@ def compute_metrics(eval_pred):
 
 
 def train():
+    logger.info("Starting...")
     dataset = load_dataset("samsum")
 
     train_dataset = dataset['train']
@@ -48,8 +49,12 @@ def train():
     logger.debug(f"Dialogue quantiles: {dialogue_quantiles}")
     logger.debug(f"Summary quantiles: {summary_quantiles}")
 
+    logger.info("Loading Model...")
+    
     data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=checkpoint)
     model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint)
+
+    logger.info("Model Loaded Successfully...")
 
     training_args = Seq2SeqTrainingArguments(
         output_dir="best_summarization_model",
@@ -77,4 +82,9 @@ def train():
         compute_metrics=compute_metrics,
     )
 
+    logger.debug("Starting Training Job...")
+
     trainer.train()
+    tokenizer.save_pretrained("best_summarization_model")
+
+    logger.debug("Model Trained Successfully.")
