@@ -68,7 +68,7 @@ def train(
         learning_rate=2e-5,
         logging_dir="logs",
         logging_strategy="steps",
-        logging_steps=500,
+        logging_steps=10,
         per_device_train_batch_size=16,
         per_device_eval_batch_size=16,
         weight_decay=0.01,
@@ -79,6 +79,8 @@ def train(
         predict_with_generate=True,
         fp16=True,
     )
+
+    logger.info("Starting Training...")
 
     trainer = Seq2SeqTrainer(
         model=model,
