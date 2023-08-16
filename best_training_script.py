@@ -1,6 +1,6 @@
-import rouge
-import numpy as np
+import evaluate
 
+import numpy as np
 from loguru import logger
 from utils import find_quantiles
 from datasets import load_dataset
@@ -9,6 +9,8 @@ from transformers import AutoTokenizer
 from transformers import DataCollatorForSeq2Seq
 from transformers import AutoModelForSeq2SeqLM, Seq2SeqTrainingArguments, Seq2SeqTrainer
 
+
+rouge = evaluate.load("rouge")
 
 def compute_metrics(eval_pred):
     predictions, labels = eval_pred
